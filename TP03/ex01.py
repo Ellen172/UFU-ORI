@@ -1,6 +1,7 @@
 from unidecode import unidecode
 import re
 import numpy as np 
+import math
 
 # FUNÇÕES:  
 
@@ -25,6 +26,14 @@ def calcular_tf_idf(bag_of_words, freq_termo_colecao):
 		tf_idf.append(num)
 	return tf_idf
 
+def calcular_norma(list): 
+	soma = 0
+	for elem in list: 
+		elem = elem * elem 
+		soma += elem
+	raiz = math.sqrt(soma)
+	return raiz
+	
 def printar_tf_idf(tf_idf, vocabulario):
 	n=0
 	for termo in vocabulario: 
@@ -139,3 +148,13 @@ for termo in vocabulario:
 tf_idf_q = calcular_tf_idf(bow_q, freq_termo_colecao)
 
 # calcular normas dos documentos
+
+norma_d1 = calcular_norma(tf_idf_d1)
+norma_d2 = calcular_norma(tf_idf_d2)
+norma_d3 = calcular_norma(tf_idf_d3)
+norma_d4 = calcular_norma(tf_idf_d4)
+norma_d5 = calcular_norma(tf_idf_d5)
+norma_q = calcular_norma(tf_idf_q)
+
+print("norma d1 = " + str(norma_d1) + " | norma d2 = " + str(norma_d2) + " | norma d3 = " + str(norma_d3)  
+	+ " | norma d4 = " + str(norma_d4) + " | norma d5 = " + str(norma_d5) + " | norma q = " + str(norma_q))
