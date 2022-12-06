@@ -18,9 +18,11 @@ termos_vocabulario = re.sub(r'[^\w\s]','', unidecode(vocabulario)).lower().split
 # definir termos dos documentos através de arquivos em pasta
 list_termos_docs = []
 nro_documentos = 0
+files = []
 path = "/home/ellen/Documentos/UFU-ORI/TP02/docs"
 os.chdir(path)
 for file in os.listdir(): 
+    files.append(file)
     file_path = f"{path}/{file}"
     documento_file = open(file_path, 'r')
     documento = documento_file.read()
@@ -71,5 +73,16 @@ for bag_of_words in list_bag_of_words:
 
 # print dos resultados 
 
-for tf_idf in list_tf_idf: 
-    print(tf_idf)
+print("\n----------------------- Resultado TF-IDF --------------------------------\n")
+
+k=0
+for termos_doc in list_termos_docs: 
+    # documento
+    print("documento: " + str(files[k]))
+    # termo com tf-idf
+    l=0
+    for termo in termos_vocabulario: 
+        print(termo + " = " + str(list_tf_idf[k][l]))
+        l+=1
+    k+=1
+    print()
