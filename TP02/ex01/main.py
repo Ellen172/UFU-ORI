@@ -2,6 +2,8 @@ import os
 from unidecode import unidecode
 import re
 
+# lendo documentos 
+
 path = "/home/ellen/Documentos/UFU-ORI/TP02/docs"
 os.chdir(path) 
 
@@ -18,6 +20,14 @@ for file in os.listdir(): # para cada arquivo no diretorio especificado
     for palavra in termosDoc: 
         if(palavra not in vocabulario): 
             vocabulario.append(palavra)
+
+# salvando vocabulario em arquivo texto 
+
+file_voc = open("/home/ellen/Documentos/UFU-ORI/TP02/vocabulario.txt", "w")
+for termo in vocabulario: 
+    file_voc.write(termo + "\n")
+
+# bag of words
 
 lista = []
 for termosDoc in termosDocs: 

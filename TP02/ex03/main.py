@@ -15,7 +15,7 @@ termos_vocabulario = []
 list_termos_docs = []
 nro_documentos = 0
 files = []
-path = "/home/ellen/Documentos/UFU-ORI/TP02/docs"
+path = "/home/ellen/Documentos/UFU-ORI/TP02/ex03/hinos"
 os.chdir(path)
 for file in os.listdir(): 
     # inserir na lista de documentos
@@ -83,3 +83,41 @@ for list in list_tf_idf:
     print(files[k] + ": ")
     print(list)
     k+=1
+
+# imprindo no arquivo resposta 
+
+file_resposta = open("/home/ellen/Documentos/UFU-ORI/TP02/ex03/resposta.txt", "w")
+
+file_resposta.write("\ta) Qual o tamanho do vocabulário da coleção?\n\n")
+
+voc=1
+file_resposta.write("termos: ")
+for termo in termos_vocabulario: 
+    file_resposta.write(termo + ",")
+    voc += 1
+file_resposta.write("\n\n" + "O vocabulario possui " + str(voc-1) + " termos\n")
+
+file_resposta.write("\n\tb) Encontre o TF-IDF de cada um dos documentos da coleção.\n")
+
+maior_tf_idf = 0
+maior_termo = termos_vocabulario[0]
+maior_doc = files[0]
+i_doc = 0
+for list in list_tf_idf: 
+    i_termo = 0
+    #print("doc = " + files[i_doc])
+    file_resposta.write("\n" + str(files[i_doc]) + ":\n")
+    for tf_idf in list : 
+        #print(termos_vocabulario[i_termo] + " = " + str(tf_idf))
+        file_resposta.write(termos_vocabulario[i_termo] + " = " + str(round(tf_idf, 3)) + " | ")
+        if (tf_idf > maior_tf_idf):
+            maior_tf_idf = tf_idf
+            maior_termo = termos_vocabulario[i_termo]
+            maior_doc = files[i_doc]
+        i_termo+=1
+    file_resposta.write("\n")
+    i_doc +=1
+
+file_resposta.write("\n\tc) Qual termo(s), em qual documento, possui o maior peso TF-IDF?\n")
+
+file_resposta.write("\nO termo com maior TF-IDF é o '" + str(maior_termo) + "' no documento '" + str(maior_doc) + "' com o valor de " + str(maior_tf_idf))  
